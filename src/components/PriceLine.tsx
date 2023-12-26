@@ -15,6 +15,7 @@ type TPriceLineProps = {
     foregroundColor: string;
     color?: string;
     opacityOnOverlap: number;
+    title?: string;
 };
 
 const PriceLine = ({
@@ -26,6 +27,7 @@ const PriceLine = ({
     hideOffscreenLine,
     hideBarrierLine,
     store,
+    title,
 }: TPriceLineProps) => {
     const {
         className,
@@ -41,7 +43,6 @@ const PriceLine = ({
         priceDisplay,
         priceLineWidth,
         setDragLine,
-        title,
         visible,
     } = store;
 
@@ -93,7 +94,8 @@ const PriceLine = ({
                             backgroundColor: color,
                             width: isOverlappingWithPriceLine ? overlappedBarrierWidth : width,
                             opacity,
-                            right: (isOverlappingWithPriceLine ? width - overlappedBarrierWidth : 0) + (isMobile ? 20 : 4),
+                            right:
+                                (isOverlappingWithPriceLine ? width - overlappedBarrierWidth : 0) + (isMobile ? 20 : 4),
                         }}
                     >
                         <HamburgerDragIcon />
@@ -120,7 +122,9 @@ const PriceLine = ({
                         />
                     )}
                 </div>
-                {title && <PriceLineTitle color={color} title={title} yAxiswidth={overlappedBarrierWidth} opacity={opacity} />}
+                {title && (
+                    <PriceLineTitle color={color} title={title} yAxiswidth={overlappedBarrierWidth} opacity={opacity} />
+                )}
             </div>
         </div>
     );
