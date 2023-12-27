@@ -60,6 +60,7 @@ const PriceLine = ({
     if (!showBarrier) return null;
 
     const width = priceLineWidth + 12;
+    const price_right_offset = (isOverlappingWithPriceLine ? width - overlappedBarrierWidth : 0) + (isMobile ? 20 : 4);
 
     return (
         <div
@@ -89,13 +90,12 @@ const PriceLine = ({
                 <div className='draggable-area' />
                 <div className='draggable-area-wrapper'>
                     <div
-                        className={'drag-price'}
+                        className='drag-price'
                         style={{
                             backgroundColor: color,
                             width: isOverlappingWithPriceLine ? overlappedBarrierWidth : width,
                             opacity,
-                            right:
-                                (isOverlappingWithPriceLine ? width - overlappedBarrierWidth : 0) + (isMobile ? 20 : 4),
+                            right: price_right_offset,
                         }}
                     >
                         <HamburgerDragIcon />
@@ -123,7 +123,12 @@ const PriceLine = ({
                     )}
                 </div>
                 {title && (
-                    <PriceLineTitle color={color} title={title} yAxiswidth={overlappedBarrierWidth} opacity={opacity} />
+                    <PriceLineTitle
+                        color={color}
+                        title={title}
+                        yAxiswidth={width + price_right_offset}
+                        opacity={opacity}
+                    />
                 )}
             </div>
         </div>
